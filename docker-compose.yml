@@ -41,56 +41,6 @@ services:
       - net-mysql
       - net-redis
 
-  php56:
-    build:
-      context: .
-      args:
-        PHP_VERSION: 5.6
-        SOURCE_LIST: jessie
-        XDEBUG_VERSION: 2.5.5
-        SWOOLE_VERSION: 2.0.11
-        SUPPORT_MCRYPT: "true"
-        BUILT_IN_OPCACHE: "true"
-    expose:
-      - "9000"
-    volumes:
-      - ./www/:/var/www/html/:rw
-      - ./conf/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./conf/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ./log/:/var/log/dnmp/:rw
-    restart: always
-    cap_add:
-      - SYS_PTRACE
-    networks:
-      - net-php56
-      - net-mysql
-      - net-redis
-
-  php54:
-    build:
-      context: .
-      args:
-        PHP_VERSION: 5.4
-        SOURCE_LIST: jessie
-        XDEBUG_VERSION: 2.4.1
-        SWOOLE_VERSION: "false"
-        SUPPORT_MCRYPT: "true"
-        BUILT_IN_OPCACHE: "false"
-    expose:
-      - "9000"
-    volumes:
-      - ./www/:/var/www/html/:rw
-      - ./conf/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./conf/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ./log/:/var/log/dnmp/:rw
-    restart: always
-    cap_add:
-      - SYS_PTRACE
-    networks:
-      - net-php54
-      - net-mysql
-      - net-redis
-
   mysql:
     image: mysql:8.0
     ports:
@@ -134,7 +84,5 @@ services:
 
 networks:
   net-php72:
-  net-php56:
-  net-php54:
   net-mysql:
   net-redis:
