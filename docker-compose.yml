@@ -13,8 +13,6 @@ services:
     restart: always
     networks:
       - net-php72
-      - net-php56
-      - net-php54
 
   php72:
     build:
